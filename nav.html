@@ -4,6 +4,7 @@
 <link rel=stylesheet href="style.css"/>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
+var titlePrefix = "Gonzo Reader - ";
 var titleSpan, preloadFrame, navFrame, contentFrame;
 var feed = null;
 var i = 0;
@@ -27,6 +28,7 @@ function load() {
   feedLoader.load(function(result) {
     if (!result.error) {
       feed = result.feed;
+      top.document.title = titlePrefix + feed.title;
       display();
     } else {
       alert("Error: " + result.error.message);
