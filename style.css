@@ -14,3 +14,4 @@
   -webkit-border-radius: 0.5em;
 }
 a:link, a:visited, a:active { text-decoration: none; }
+#feedIcon { vertical-align: middle; }

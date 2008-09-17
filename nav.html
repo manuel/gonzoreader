@@ -5,7 +5,7 @@
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
 var titlePrefix = "Gonzo Reader - ";
-var titleSpan, preloadFrame, navFrame, contentFrame;
+var titleSpan, feedLink, preloadFrame, navFrame, contentFrame;
 var feed = null;
 var i = 0;
 var active = true;
@@ -17,6 +17,7 @@ window.onbeforeunload = function() {
 
 function load() {
   titleSpan = document.getElementById("titleSpan");
+  feedLink = document.getElementById("feedLink");
   preloadFrame = document.getElementById("preloadFrame");
   navFrame = parent.frames[0];
   contentFrame = parent.frames[1];
@@ -29,6 +30,9 @@ function load() {
     if (!result.error) {
       feed = result.feed;
       top.document.title = titlePrefix + feed.title;
+      feedLink.href = feed.link;
+      feedLink.title = feed.title;
+      feedLink.style.visibility = "visible";
       display();
     } else {
       alert("Error: " + result.error.message);
@@ -94,6 +98,7 @@ function back() {
 <button id=prevButton onClick="prev()" disabled>&lt;</button>
 <button id=nextButton onClick="next()" disabled>&gt;</button>
 <a id=titleSpan target=contentFrame></a>
+<a id=feedLink style="visibility: hidden"><img border=0 id=feedIcon src="feed.jpg"></a>
 <iframe id=preloadFrame></iframe>
 </body>
 </html>
