@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>Gonzo Reader</title>
+<link rel=stylesheet href="style.css"/>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+var titleSpan, preloadFrame, navFrame, contentFrame;
+var feed = null;
+var i = 0;
+var active = true;
+
+google.load("feeds", "1");
+window.onbeforeunload = function() { 
+  if (active) return "Leave Gonzo Reader?";
+}
+
+function load() {
+  titleSpan = document.getElementById("titleSpan");
+  preloadFrame = document.getElementById("preloadFrame");
+  navFrame = parent.frames[0];
+  contentFrame = parent.frames[1];
+
+  var feedUrl = unescape(parent.location.search.slice(5)); // "?url="
+  var feedLoader = new google.feeds.Feed(feedUrl);
+  titleSpan.innerHTML = "Loading feed...";
+  feedLoader.setNumEntries(100);
+  feedLoader.load(function(result) {
+    if (!result.error) {
+      feed = result.feed;
+      display();
+    } else {
+      alert("Error: " + result.error.message);
+    }
+  });
+}
+
+function display() {
+  enableButtons();
+  if (feed == null) {
+    alert("Error: no feed defined.");
+  }
+  var entry = feed.entries[i]
+  titleSpan.innerHTML = entry.title;
+  titleSpan.href = entry.link;
+  contentFrame.location = entry.link;
+  contentFrame.focus();
+  setTimeout("preload()", 500);
+}
+
+function next() {
+  if (i < (feed.entries.length - 1)) {
+    i++;
+    display();
+  } else {
+    alert("You are at the last entry.");
+    active = false;
+  }
+}
+
+function prev() {
+  if (i > 0) {
+    i--;
+    display();
+  } else {
+    alert("You are at the first entry.");
+    active = false;
+  }
+}
+
+function enableButtons() {
+  prevButton.disabled = false;
+  nextButton.disabled = false;
+  if (i == 0) {
+    prevButton.disabled = true;
+  }
+  if (i >= (feed.entries.length - 1)) {
+    nextButton.disabled = true;
+  }
+}
+
+function preload() {
+  var link = feed.entries[i+1].link;
+  preloadFrame.contentWindow.location = link;
+}
+
+function back() {
+  active = false;
+  top.location.href = "index.html";
+}
+</script>
+</head>
+<body onLoad="load()">
+<a id=backButton href="javascript:back()">Gonzo Reader</a>
+<button id=prevButton onClick="prev()">&lt;</button>
+<button id=nextButton onClick="next()">&gt;</button>
+<a id=titleSpan target=contentFrame></a>
+<iframe id=preloadFrame></iframe>
+</body>
+</html>

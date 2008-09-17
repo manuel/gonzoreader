@@ -1,0 +1,15 @@
+body {
+  background-color: #c0c0c0;
+  margin: 2em;
+}
+.panel {
+  width: 45em;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+  padding: 1em 2em;
+}
+td {
+padding: 0 1em 1em 0;
+}

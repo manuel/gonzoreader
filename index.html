@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Gonzo Reader</title>
+<link rel=stylesheet href="style.css"/>
+<link rel=stylesheet href="page-style.css"/>
+</head>
+<body>
+
+<div class=panel>
+
+<h1>Gonzo Reader</h1>
+
+<h2>view a feed</h2>
+
+<form id=urlForm action="reader.html" method=GET>
+<input type=text name=url id=urlField value="http://feeds.delicious.com/v2/rss/popular">
+<input type=submit value="Enter Feed URL">
+</form>
+
+<h2>or your del.icio.us network</h2>
+
+<form id=deliForm action="javascript: location.href = 'reader.html?url=http://feeds.delicious.com/v2/rss/network/' + document.forms.deliForm.usernameField.value + '?count=100'">
+<input type=text name=usernameField id=usernameField>
+<input type=submit value="Enter Username">
+</form>
+
+</div>
+
+<p style="margin: 1em 2em;"><em>Gonzo Reader</em> is a feed reader that shows the
+actual page designs.
+
+<a href="credits.html">Credits, privacy, forum, ...</a>
+
+</body>
+</html>
