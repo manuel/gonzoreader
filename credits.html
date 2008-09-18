@@ -54,6 +54,10 @@ loading.)</p>
 <td valign=top align=left width="33%">
 <h3>browsers</h3>
 So far, I have only tested it in <nobr>Firefox 3</nobr>. 
+
+<h3>bookmarklet <img src="new.gif"></h3>
+<p><a href="javascript:var i, link, links = document.getElementsByTagName('link'); for (i=0;i<links.length;i++) { link=links[i]; if (link.rel == 'alternate') { location.href = 'http://gonzoreader.110mb.com/reader.html?url=' + escape(link.href); break; } };">View with Gonzo Reader</a> Bookmarklet <small>(use on a page with a feed to view that feed)</small>
+
 </td>
 
 </tr>
