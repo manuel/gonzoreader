@@ -2,6 +2,9 @@ body {
   background-color: #c0c0c0;
   margin: 2em;
 }
+h1 {
+  color: #c0c0c0;
+}
 .panel {
   width: 45em;
   background-color: #fff;
