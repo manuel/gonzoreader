@@ -16,7 +16,6 @@
 <input type=submit value="Enter Feed URL">
 </form>
 
-
 </div>
 
 <div style="margin: 1em 2em;">
@@ -25,6 +24,45 @@
 actual page designs.
 <a href="credits.html">Bookmarklet, forum, ...</a>
 
+</div>
+
+<div style="margin: 1em 2em;">
+<h2 style="color: #fff;">quick links</h2>
+<script type="text/javascript">
+var cannedSearches = [
+  { name: "View your del.icio.us network",
+    template: "http://feeds.delicious.com/v2/rss/network/<ARG>?count=100",
+    prompt: "Enter username" },
+  { name: "View popular pages on del.icio.us",
+    template: "http://feeds.delicious.com/v2/rss/tag/<ARG>?count=100",
+    prompt: "Enter tag" },
+  { name: "View a del.icio.us user",
+    template: "http://feeds.delicious.com/v2/rss/<ARG>?count=100",
+    prompt: "Enter username" },
+  { name: "Google News top stories",
+    template: "http://news.google.com/?output=rss" },
+  { name: "Hacker News",
+    template: "http://news.ycombinator.com/rss" }
+];
+for (var i = 0; i < cannedSearches.length; i++) {
+  var cs = cannedSearches[i];
+  document.write("<li><a href='javascript:cannedSearch(" + i + ")'>" + cs.name + "</a></li>")
+}
+function cannedSearch(i) {
+  var url, cs = cannedSearches[i];
+  if (cs.template.indexOf("<ARG>") != -1) {
+    var arg = prompt(cs.prompt + ":");
+    if (arg) {
+      url = cs.template.replace("<ARG>", arg);
+    } else {
+      return;
+    }
+  } else {
+    url = cs.template;
+  }
+  location.href = "reader.html?url=" + escape(url);
+}
+</script>
 </div>
 
 </body>
