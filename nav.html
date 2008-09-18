@@ -44,8 +44,13 @@ function display() {
   enableButtons();
   if (feed == null) {
     alert("Error: no feed defined.");
+    return;
   }
-  var entry = feed.entries[i]
+  var entry = feed.entries[i];
+  if (entry == null) {
+    titleSpan.innerHTML = "Ooops, that feed is empty.  Please try again later.";
+    return;
+  }
   titleSpan.innerHTML = entry.title;
   titleSpan.href = entry.link;
   contentFrame.location = entry.link;
